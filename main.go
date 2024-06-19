@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Println("Hello")
+	cwd, err := os.Getwd()
+	if err != nil {
+		panic("Couldn't get the current working directory.")
+	}
+
+	fmt.Println(cwd)
 }
