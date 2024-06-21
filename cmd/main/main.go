@@ -1,11 +1,22 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 )
 
 func main() {
+
+	// Parse the flags
+	var isInfoFlagSet bool
+	flag.BoolVar(&isInfoFlagSet, "i", false, "Include additional info.")
+	var isRecursiveFlagSet bool
+	flag.BoolVar(&isRecursiveFlagSet, "r", false, "Recursively list all the sub-directories content.")
+
+	flag.Parse()
+
+	// Default behavior without any flags
 	cwd, err := os.Getwd()
 	if err != nil {
 		panic("Couldn't get the current working directory.")
