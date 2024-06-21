@@ -25,7 +25,7 @@ func main() {
 		// }
 	}
 
-	fmt.Println("\nChildren:")
+	fmt.Println("")
 	for _, dir := range directories {
 		fmt.Println(dir)
 	}
