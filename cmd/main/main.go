@@ -3,7 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
+
+	defaults "github.com/parambirje/go-bash-ls/internal/default"
 )
 
 func main() {
@@ -16,28 +17,27 @@ func main() {
 
 	flag.Parse()
 
-	// Default behavior without any flags
-	cwd, err := os.Getwd()
-	if err != nil {
-		panic("Couldn't get the current working directory.")
+	// global directories list
+	var directories []defaults.Directory
+
+	if !isInfoFlagSet && !isRecursiveFlagSet {
+		// Default behavior without any flags
+
+		err := defaults.RunDefault(&directories)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+	} else if isInfoFlagSet {
+		// Additional info flag is set
+
+		fmt.Println("Starting runner with additional info.")
+
+	} else if isRecursiveFlagSet {
+		// Recursive flag is set
+
+		fmt.Println("Starting runner recursively.")
 	}
 
-	fmt.Println("CWD:", cwd)
-
-	entries, err := os.ReadDir(cwd)
-	if err != nil {
-		panic("Couldn't read directory.")
-	}
-
-	var directories []string
-	for _, entry := range entries {
-		// if entry.IsDir() {
-		directories = append(directories, entry.Name())
-		// }
-	}
-
-	fmt.Println("")
-	for _, dir := range directories {
-		fmt.Println(dir)
-	}
+	// Additionally handle when both flags are set
 }
