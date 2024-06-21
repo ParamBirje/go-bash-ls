@@ -1,1 +1,2 @@
-go-bash-ls
+# Ignoring build files
+bin/*
