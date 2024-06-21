@@ -9,6 +9,7 @@ import (
 
 type Directory struct {
 	Path string
+	Name string
 	Type string // "f" or "d" for file or directory
 }
 
@@ -30,13 +31,14 @@ func RunDefault(directories *[]Directory) error {
 	for _, entry := range entries {
 		*directories = append(*directories, Directory{
 			Path: filepath.Join(cwd, entry.Name()),
+			Name: entry.Name(),
 			Type: entry.Type().String(),
 		})
 	}
 
 	fmt.Println("")
 	for _, dir := range *directories {
-		fmt.Println(dir)
+		fmt.Println(dir.Name)
 	}
 
 	return nil
