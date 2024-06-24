@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	defaults "github.com/parambirje/go-bash-ls/internal/default"
+	"github.com/parambirje/go-bash-ls/internal/recursive"
 )
 
 func main() {
@@ -43,7 +44,10 @@ func main() {
 	} else if isRecursiveFlagSet {
 		// Recursive flag is set
 
-		fmt.Println("Starting runner recursively.")
+		err := recursive.RunRecursive(&directories, cwd, ".")
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
 	// Additionally handle when both flags are set
