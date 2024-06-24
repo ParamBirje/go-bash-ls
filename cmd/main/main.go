@@ -54,8 +54,13 @@ func main() {
 	// --
 
 	// Printing the directories list
-	fmt.Println("")
+	fmt.Println()
 	for _, dir := range directories {
+		if isRecursiveFlagSet && string(dir.Type[0]) == "d" {
+			// for spacing between directories
+			fmt.Println()
+		}
+
 		fmt.Println(dir.Name)
 	}
 }
