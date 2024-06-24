@@ -20,10 +20,16 @@ func main() {
 	// global directories list
 	var directories []defaults.Directory
 
+	cwd, err := defaults.GetCurrentDirectory()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	if !isInfoFlagSet && !isRecursiveFlagSet {
 		// Default behavior without any flags
 
-		err := defaults.RunDefault(&directories)
+		err := defaults.RunDefault(&directories, cwd)
 		if err != nil {
 			fmt.Println(err)
 		}

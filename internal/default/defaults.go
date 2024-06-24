@@ -13,14 +13,8 @@ type Directory struct {
 	Type string // "f" or "d" for file or directory
 }
 
-func RunDefault(directories *[]Directory) error {
+func RunDefault(directories *[]Directory, cwd string) error {
 	// Default behavior without any flags
-	cwd, err := os.Getwd()
-	if err != nil {
-		return errors.New("could not get the current working directory")
-	}
-
-	fmt.Println("CWD:", cwd)
 
 	entries, err := os.ReadDir(cwd)
 	if err != nil {
@@ -42,4 +36,14 @@ func RunDefault(directories *[]Directory) error {
 	}
 
 	return nil
+}
+
+func GetCurrentDirectory() (path string, err error) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		return "", errors.New("could not get the current working directory")
+	}
+
+	fmt.Println("CWD:", cwd)
+	return cwd, nil
 }
