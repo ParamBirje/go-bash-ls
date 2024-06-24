@@ -10,7 +10,7 @@ import (
 type Directory struct {
 	Path string
 	Name string
-	Type string // "f" or "d" for file or directory
+	Type string // for file (-) or directory (d)
 }
 
 func RunDefault(directories *[]Directory, cwd string) error {
