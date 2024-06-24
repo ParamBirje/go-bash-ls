@@ -17,9 +17,10 @@ func main() {
 
 	flag.Parse()
 
-	// global directories list
+	// Global directories list
 	var directories []defaults.Directory
 
+	// Getting current working directory
 	cwd, err := defaults.GetCurrentDirectory()
 	if err != nil {
 		fmt.Println(err)
@@ -46,4 +47,11 @@ func main() {
 	}
 
 	// Additionally handle when both flags are set
+	// --
+
+	// Printing the directories list
+	fmt.Println("")
+	for _, dir := range directories {
+		fmt.Println(dir.Name)
+	}
 }

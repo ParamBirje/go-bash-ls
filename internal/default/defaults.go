@@ -15,6 +15,7 @@ type Directory struct {
 
 func RunDefault(directories *[]Directory, cwd string) error {
 	// Default behavior without any flags
+	// Directly mutates the directories list using pointer
 
 	entries, err := os.ReadDir(cwd)
 	if err != nil {
@@ -28,11 +29,6 @@ func RunDefault(directories *[]Directory, cwd string) error {
 			Name: entry.Name(),
 			Type: entry.Type().String(),
 		})
-	}
-
-	fmt.Println("")
-	for _, dir := range *directories {
-		fmt.Println(dir.Name)
 	}
 
 	return nil
