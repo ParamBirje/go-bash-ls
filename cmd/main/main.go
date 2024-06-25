@@ -28,30 +28,20 @@ func main() {
 		return
 	}
 
-	if !isInfoFlagSet && !isRecursiveFlagSet {
-		// Default behavior without any flags
-
-		err := defaults.RunDefault(&directories, cwd)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-	} else if isInfoFlagSet {
-		// Additional info flag is set
-
-		fmt.Println("Starting runner with additional info.")
-
-	} else if isRecursiveFlagSet {
+	if isRecursiveFlagSet {
 		// Recursive flag is set
-
 		err := recursive.RunRecursive(&directories, cwd, ".")
 		if err != nil {
 			fmt.Println(err)
 		}
-	}
 
-	// Additionally handle when both flags are set
-	// --
+	} else {
+		// Default behavior without any flags
+		err := defaults.RunDefault(&directories, cwd)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
 
 	// Printing the directories list
 	fmt.Println()
@@ -61,6 +51,10 @@ func main() {
 			fmt.Println()
 		}
 
-		fmt.Println(dir.Name)
+		if isInfoFlagSet {
+			fmt.Println(dir.Type, dir.Name)
+		} else {
+			fmt.Println(dir.Name)
+		}
 	}
 }
